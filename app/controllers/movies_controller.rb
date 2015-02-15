@@ -8,6 +8,8 @@ class MoviesController < ApplicationController
 
   def index
 
+    ratings_param_hash = params[:ratings]
+
     # title_sort symbol was placed in the params
     if params[:sorting_mechanism] == "title"
       @movies = Movie.order("title asc")
