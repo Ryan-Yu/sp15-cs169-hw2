@@ -7,11 +7,12 @@ class MoviesController < ApplicationController
   end
 
   def index
+
     # title_sort symbol was placed in the params
-    if params[:title_sort] == "on"
+    if params[:sorting_mechanism] == "title"
       @movies = Movie.order("title asc")
       @movie_highlight = "hilite"
-    elsif params[:date_sort] == "on"
+    elsif params[:sorting_mechanism] == "release_date"
       @movies = Movie.order("release_date asc")
       @date_highlight = "hilite"
     else
