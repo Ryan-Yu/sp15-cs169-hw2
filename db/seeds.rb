@@ -8,7 +8,7 @@
 
 movies = [{:title => 'Aladdin', :rating => 'G', :release_date => '25-Nov-1992'},
     	  {:title => 'The Terminator', :rating => 'R', :release_date => '26-Oct-1984'},
-    	  {:title => 'When Harry Met Sally', :rating => 'R', :release_date => '21-Jul-1989'},
+    	  {:title => 'When Ha 	rry Met Sally', :rating => 'R', :release_date => '21-Jul-1989'},
       	  {:title => 'The Help', :rating => 'PG-13', :release_date => '10-Aug-2011'},
       	  {:title => 'Chocolat', :rating => 'PG-13', :release_date => '5-Jan-2001'},
       	  {:title => 'Amelie', :rating => 'R', :release_date => '25-Apr-2001'},

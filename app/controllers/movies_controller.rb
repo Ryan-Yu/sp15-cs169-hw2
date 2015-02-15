@@ -7,7 +7,16 @@ class MoviesController < ApplicationController
   end
 
   def index
-    @movies = Movie.all
+    # title_sort symbol was placed in the params
+    if params[:title_sort] == "on"
+      @movies = Movie.order("title asc")
+      @movie_highlight = "hilite"
+    elsif params[:date_sort] == "on"
+      @movies = Movie.order("release_date asc")
+      @date_highlight = "hilite"
+    else
+      @movies = Movie.all
+    end
   end
 
   def new
