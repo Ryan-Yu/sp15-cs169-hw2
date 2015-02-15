@@ -17,6 +17,9 @@ class MoviesController < ApplicationController
     else
       @movies = Movie.all
     end
+
+    # Deal with movie ratings now...
+    @all_ratings = Movie.get_possible_ratings()
   end
 
   def new
