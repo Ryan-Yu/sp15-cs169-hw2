@@ -13,7 +13,7 @@ class MoviesController < ApplicationController
 
     # If user has specified 1 or more ratings, then update session ratings
     unless params[:ratings].nil?
-      @filtered_ratings = params[:ratings].keys
+      @filtered_ratings = params[:ratings]
       session[:filtered_ratings] = @filtered_ratings
     end
 
@@ -25,24 +25,27 @@ class MoviesController < ApplicationController
       session[:sorting_mechanism] = params[:sorting_mechanism]
     end
 
+    if params[:sorting_mechanism].nil? && params[:ratings].nil? && session[:filtered_ratings]
+      @filtered_ratings = session[:filtered_ratings]
+      @sorting_mechanism = session[:sorting_mechanism]
+
+      flash.keep
+      redirect_to movies_path({order_by: @sorting_mechanism, ratings: @filtered_ratings})
+    end
+
     @movies = Movie.all
 
+    # Filter movies based on rating if our sessions hash has any ratings in it
     if session[:filtered_ratings]
       @movies = @movies.select{ |movie| session[:filtered_ratings].include? movie.rating }
     end
 
     # title_sort symbol was placed in the params
     if session[:sorting_mechanism] == "title"
-      # @movies = Movie.order("title asc")
-
       @movies = @movies.sort! { |a,b| a.title <=> b.title }
-
       @movie_highlight = "hilite"
     elsif session[:sorting_mechanism] == "release_date"
-      # @movies = Movie.order("release_date asc")
-
       @movies = @movies.sort! { |a,b| a.release_date <=> b.release_date }
-
       @date_highlight = "hilite"
     else
       
