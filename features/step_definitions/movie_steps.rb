@@ -23,22 +23,22 @@ end
 When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   # We want to uncheck all of our movies
   if uncheck == "un"
-    movies_list = rating_list.split(',')
-    movies_list.each do |movie|
-      step "I uncheck #{movie}"
+    ratings_list = rating_list.split(',').map(&:strip)
+    ratings_list.each do |rating|
+      step %Q{I uncheck "ratings_#{rating}"}
     end
   # We want to check all of our movies
   else
-    movies_list = rating_list.split(',')
-    movies_list.each do |movie|
-      step "I check #{movie}"
+    ratings_list = rating_list.split(',').map(&:strip)
+    ratings_list.each do |rating|
+      step %Q{I check "ratings_#{rating}"}
     end
   end
-  # HINT: use String#split to split up the rating_list, then
-  #   iterate over the ratings and reuse the "When I check..." or
-  #   "When I uncheck..." steps in lines 89-95 of web_steps.rb
 end
 
 Then /I should see all the movies/ do
-  # Make sure that all the movies in the app are visible in the table
+  array_of_movies = page.all("table#movies tbody tr td[1]").map {|element| element.text }
+  number_of_movies_in_table = array_of_movies.size
+  number_of_movies_in_database = Movie.all.size
+  assert(number_of_movies_in_database == number_of_movies_in_table)
 end
