@@ -4,7 +4,6 @@ Given /the following movies exist/ do |movies_table|
   movies_table.hashes.each do |movie|
     Movie.create!(:title => movie['title'], :rating => movie['rating'], :release_date => movie['release_date'])
   end
-  # flunk "Unimplemented"
 end
 
 # Make sure that one string (regexp) occurs before or after another one
@@ -13,7 +12,8 @@ end
 Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
   #  ensure that that e1 occurs before e2.
   #  page.body is the entire content of the page as a string.
-  flunk "Unimplemented"
+  list_of_movies_in_order = page.all("table#movies tbody tr td[1]").map {|element| element.text}
+  assert(list_of_movies_in_order.index(e1) < list_of_movies_in_order.index(e2))
 end
 
 # Make it easier to express checking or unchecking several boxes at once
