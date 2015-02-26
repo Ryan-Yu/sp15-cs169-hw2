@@ -1,5 +1,7 @@
 Rottenpotatoes::Application.routes.draw do
 
+  get 'movies/get_movies_with_same_director/:id' => 'movies#find_with_same_director', :as => :find_with_same_director
+
   resources :movies
   # The priority is based upon order of creation:
   # first created -> highest priority.

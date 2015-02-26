@@ -1,0 +1,19 @@
+%h1 All movies with director #{@current_movie_director}
+
+%table#movies
+  %thead
+    %tr
+      %th Title
+      %th Rating
+      %th Release Date
+      %th More Info
+  %tbody
+    - @movies_to_render.each do |movie|
+      %tr
+        %td= movie.title 
+        %td= movie.rating
+        %td= movie.release_date
+        %td= link_to "More about #{movie.title}", movie_path(movie)
+
+= link_to 'Back to movie list', movies_path
+

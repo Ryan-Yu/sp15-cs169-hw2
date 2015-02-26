@@ -80,4 +80,18 @@ class MoviesController < ApplicationController
     redirect_to movies_path
   end
 
+  def find_with_same_director
+    @movie = Movie.find(params[:id])
+    # Find director of current movie
+    @current_movie_director = @movie.director
+    if @current_movie_director.nil? or @current_movie_director.empty?
+      # If current movie has no director, flash warning and redirect to movies index page
+      flash[:warning] = "#{@movie.title} doesn't have a director."
+      redirect_to movies_path
+    else
+      # Else find all movies with the current movie director
+      @movies_to_render = Movie.find_all_by_director(@current_movie_director)
+    end
+  end
+
 end
