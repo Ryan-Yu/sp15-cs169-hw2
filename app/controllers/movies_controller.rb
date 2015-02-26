@@ -27,7 +27,6 @@ class MoviesController < ApplicationController
     if params[:sorting_mechanism].nil? && params[:ratings].nil? && session[:filtered_ratings]
       @filtered_ratings = session[:filtered_ratings]
       @sorting_mechanism = session[:sorting_mechanism]
-
       flash.keep
       redirect_to movies_path({order_by: @sorting_mechanism, ratings: @filtered_ratings})
     end
@@ -85,7 +84,7 @@ class MoviesController < ApplicationController
     @current_movie_director = @movie.director
     if @current_movie_director.nil? or @current_movie_director.empty?
       # If current movie has no director, flash warning and redirect to movies index page
-      flash.keep[:warning] = "'#{@movie.title}' has no director info."
+      flash[:warning] = "'#{@movie.title}' has no director info."
       redirect_to movies_path
     else
       # Else find all movies with the current movie director
