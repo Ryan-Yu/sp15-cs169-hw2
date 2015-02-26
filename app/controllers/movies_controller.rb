@@ -7,7 +7,6 @@ class MoviesController < ApplicationController
   end
 
   def index
-
     # Deal with movie ratings now...
     @all_ratings = Movie.get_possible_ratings
 
@@ -86,7 +85,7 @@ class MoviesController < ApplicationController
     @current_movie_director = @movie.director
     if @current_movie_director.nil? or @current_movie_director.empty?
       # If current movie has no director, flash warning and redirect to movies index page
-      flash[:warning] = "#{@movie.title} doesn't have a director."
+      flash.keep[:warning] = "'#{@movie.title}' has no director info."
       redirect_to movies_path
     else
       # Else find all movies with the current movie director

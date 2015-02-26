@@ -22,9 +22,16 @@ module NavigationHelpers
       movie_to_edit = Movie.find_by_title($1)
       edit_movie_path(movie_to_edit)
 
+    # Add 'show' page
     when /^the details page for "(.*)"$/
       movie_to_view = Movie.find_by_title($1)
       movie_path(movie_to_view)
+
+    # Add Similar Movies page
+    when /^the Similar Movies page for "(.*)"$/
+      movie_to_find = Movie.find_by_title($1)
+      find_with_same_director_path(movie_to_find)
+
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
