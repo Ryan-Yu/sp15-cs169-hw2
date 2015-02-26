@@ -42,3 +42,7 @@ Then /I should see all the movies/ do
   number_of_movies_in_database = Movie.all.size
   assert(number_of_movies_in_database == number_of_movies_in_table)
 end
+
+Then (/^the director of "(.*)" should be "(.*)"$/) do |movie, dir|
+  assert (Movie.find_by_title(movie).director == dir)
+end

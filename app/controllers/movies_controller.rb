@@ -50,10 +50,6 @@ class MoviesController < ApplicationController
     else
       
     end
-
- 
-
-
   end
 
   def new
