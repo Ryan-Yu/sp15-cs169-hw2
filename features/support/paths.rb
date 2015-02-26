@@ -22,6 +22,10 @@ module NavigationHelpers
       movie_to_edit = Movie.find_by_title($1)
       edit_movie_path(movie_to_edit)
 
+    when /^the details page for "(.*)"$/
+      movie_to_view = Movie.find_by_title($1)
+      movie_path(movie_to_view)
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

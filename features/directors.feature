@@ -1,5 +1,3 @@
-	
-
 Feature: search for movies by director
  
   As a movie buff
@@ -21,12 +19,12 @@ Scenario: add director to existing movie
   And  I press "Update Movie Info"
   Then the director of "Alien" should be "Ridley Scott"
  
-# Scenario: find movie with same director
-#   Given I am on the details page for "Star Wars"
-#   When  I follow "Find Movies With Same Director"
-#   Then  I should be on the Similar Movies page for "Star Wars"
-#   And   I should see "THX-1138"
-#   But   I should not see "Blade Runner"
+Scenario: find movie with same director
+  Given I am on the details page for "Star Wars"
+  When  I follow "Find Movies With Same Director"
+  Then  I should be on the Similar Movies page for "Star Wars"
+  And   I should see "THX-1138"
+  But   I should not see "Blade Runner"
  
 # Scenario: can't find similar movies if we don't know director (sad path)
 #   Given I am on the details page for "Alien"
